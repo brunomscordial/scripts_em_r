@@ -1,0 +1,18 @@
+#install.packages("RPostgreSQL")
+
+library(DBI)
+
+db <- '3106200_bh'  
+host_db <- '34.95.215.2'  
+db_port <- '5432'
+db_user <- ''
+db_password <- ''
+con <- dbConnect(RPostgres::Postgres(), dbname = db, host=host_db, port=db_port, user=db_user, password=db_password)  
+
+grupos_comp <- dbGetQuery(con, "SELECT 
+								table_name FROM information_schema.tables
+								WHERE table_schema='dm_analise' 
+								AND table_type='BASE TABLE'")
+
+head(grupos_comp)
+
